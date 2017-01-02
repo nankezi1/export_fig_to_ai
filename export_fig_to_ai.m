@@ -109,10 +109,9 @@ axes_contours=findall(gca,'Type','Contour');
 current_fig=gcf;
 
 
-
-
 % prepare figure for saving
 set(gca,'TickDir','out');
+
 xl = xlim;
 yl = ylim;
 zl = zlim;
@@ -126,7 +125,7 @@ set(current_fig,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize
 % set(gca,'TickLabelInterpreter', 'latex')
 
 set(gcf, 'Color', 'None')
-
+set(gca,'Box','off')
 
 % save .tiff
 set(axes_lines,'Visible','off');
