@@ -104,7 +104,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 filename=get(handles.edit_filename,'String');
 axes_surfaces=findall(gca,'Type','Surface');
 axes_lines=findall(gca,'Type','Line');
+axes_scatter=findall(gca,'Type','Scatter');
 axes_contours=findall(gca,'Type','Contour');
+axes_titles=findall(gca,'Type','Text');
 
 current_fig=gcf;
 
@@ -130,6 +132,9 @@ set(gca,'Box','off')
 % save .tiff
 set(axes_lines,'Visible','off');
 set(axes_contours,'Visible','off');
+set(axes_scatter,'Visible','off');
+set(axes_titles,'Visible','off');
+
 xlim(xl);
 ylim(yl);
 zlim(zl);
@@ -140,6 +145,8 @@ print(current_fig,'-r600',filename,'-dtiffn');
 set(gcf, 'Color', 'None')
 set(axes_lines,'Visible','on');
 set(axes_contours,'Visible','on');
+set(axes_scatter,'Visible','on');
+set(axes_titles,'Visible','on');
 set(axes_surfaces,'Visible','off');
 % export_fig filename '-pdf' -transparent
 print(current_fig,'-r600',filename,'-dpdf');
