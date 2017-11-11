@@ -22,7 +22,7 @@ function varargout = export_fig_to_ai(varargin)
 
 % Edit the above text to modify the response to help export_fig_to_ai
 
-% Last Modified by GUIDE v2.5 02-Jan-2017 17:44:16
+% Last Modified by GUIDE v2.5 11-Nov-2017 17:08:30
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -101,7 +101,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
 filename=get(handles.edit_filename,'String');
+resolution=get(handles.edit_resolution,'String');
+
 axes_surfaces=findall(gca,'Type','Surface');
 axes_lines=findall(gca,'Type','Line');
 axes_scatter=findall(gca,'Type','Scatter');
@@ -139,7 +142,7 @@ xlim(xl);
 ylim(yl);
 zlim(zl);
 
-print(current_fig,'-r600',filename,'-dtiffn');
+print(current_fig,['-r' resolution],filename,'-dtiffn');
 
 % save .eps
 set(gcf, 'Color', 'None')
@@ -148,9 +151,33 @@ set(axes_contours,'Visible','on');
 set(axes_scatter,'Visible','on');
 set(axes_titles,'Visible','on');
 set(axes_surfaces,'Visible','off');
+
 % export_fig filename '-pdf' -transparent
-print(current_fig,'-r600',filename,'-dpdf');
+print(current_fig,['-r' resolution],filename,'-dpdf');
 
 % switch all visibility back on
 set(axes_surfaces,'Visible','on');
 set(gcf, 'Color', 'white')
+
+
+
+function edit_resolution_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_resolution (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_resolution as text
+%        str2double(get(hObject,'String')) returns contents of edit_resolution as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_resolution_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_resolution (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
