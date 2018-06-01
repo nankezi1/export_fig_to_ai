@@ -109,6 +109,7 @@ axes_surfaces=findall(gca,'Type','Surface');
 axes_lines=findall(gca,'Type','Line');
 axes_scatter=findall(gca,'Type','Scatter');
 axes_contours=findall(gca,'Type','Contour');
+axes_patches=findall(gca,'Type','Patch');
 axes_titles=findall(gca,'Type','Text');
 
 current_fig=gcf;
@@ -121,6 +122,15 @@ xl = xlim;
 yl = ylim;
 zl = zlim;
 set(gca, 'FontName', 'Arial');
+% 
+% outerpos = get(gca,'OuterPosition');
+% ti = get(gca,'TightInset'); 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% set(gca,'Position',[left bottom ax_width ax_height]);
+
 
 set(current_fig,'Units','centimeters');
 pos = get(current_fig,'Position');
@@ -129,10 +139,10 @@ set(current_fig,'PaperPositionMode','Auto','PaperUnits','centimeters','PaperSize
 
 % set(gca,'TickLabelInterpreter', 'latex')
 
-set(gcf, 'Color', 'None')
-set(gca,'Box','off')
+set(gca, 'Color', 'None');
+set(gca,'Box','off');
 
-% save .tiff
+% save .png
 set(axes_lines,'Visible','off');
 set(axes_contours,'Visible','off');
 set(axes_scatter,'Visible','off');
@@ -142,7 +152,7 @@ xlim(xl);
 ylim(yl);
 zlim(zl);
 
-print(current_fig,['-r' resolution],filename,'-dtiffn');
+print(current_fig,['-r' resolution],filename,'-dtiff');
 
 % save .eps
 set(gcf, 'Color', 'None')
@@ -151,12 +161,14 @@ set(axes_contours,'Visible','on');
 set(axes_scatter,'Visible','on');
 set(axes_titles,'Visible','on');
 set(axes_surfaces,'Visible','off');
+set(axes_patches,'Visible','off');
 
 % export_fig filename '-pdf' -transparent
 print(current_fig,['-r' resolution],filename,'-dpdf');
 
 % switch all visibility back on
 set(axes_surfaces,'Visible','on');
+set(axes_patches,'Visible','on');
 set(gcf, 'Color', 'white')
 
 
