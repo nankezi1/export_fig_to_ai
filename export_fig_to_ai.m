@@ -152,7 +152,7 @@ xlim(xl);
 ylim(yl);
 zlim(zl);
 
-print(current_fig,['-r' resolution],filename,'-dtiff');
+print(current_fig,['-r' resolution],filename,'-dpng');
 
 % save .eps
 set(gcf, 'Color', 'None')
